@@ -1,9 +1,9 @@
 <<<<<<<<<<<<<<<<<<<<<<<<<<<LEXER>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-grammar LexerT;
+lexer grammar LexerT;
 
-r  : 'WENA' ID ;         // match keyword hello followed by an identifier
+//R  : 'WENA' ID ;         // match keyword hello followed by an identifier
 
-ID : [A-Za-z0-9]+;             // match lower-case identifiers
+//ID : [A-Za-z0-9]+;             // match lower-case identifiers
 
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
 
@@ -27,6 +27,9 @@ OPENPAREN : '¿' {self.opened += 1};
 CLOSEPAREN : '?' {self.opened -= 1};
 
 BELIKE: 'IGUALITO'| 'NOIGUALITO' |'GRANDESITO'|'CHIQUITO';
+LIKE: '=';
+OPENMOUTH: '<';
+CLOSEMOUTH: '>';
 AND: 'YY';
 OR: 'OO';
 COND: AND | OR;
@@ -65,6 +68,7 @@ WGO: 'SUCEDE'; //WHAT'S GOING ON
 STOP: 'HASTAACÁMIBRO';
 DO: 'HÁGASE';
 SENTENCE: 'TEDECLARO';
+DOF: 'DOF'; //DEATH OF FILE
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<PARSER>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 grammar ParserT;
 import LexerT;
@@ -89,9 +93,14 @@ loop: TILL alloperations TILL NUMBER;
 whilest: ATST iteratecompare WGO alloperations STOP | DO alloperations TILL iteratecompare;
 
 //VARIABLE DECLARATION
-declare: WORD SENTENCE TYPETOKEN;
+declare: WORD SENTENCE TYPETOKEN | WORD SENTENCE TYPETOKEN definir;
+definir: WORD definiciones;
+definiciones: definirNum | definirStr | definirFlag | definirMatrix;
+definirNum: LIKE NUMBER; 
+definirStr: LIKE WORD;
+definirFlag: LIKE FLAG;
+definirMatrix: LIKE (OPENMOUTH NUMBER CLOSEMOUTH)+;
 
 //OPERACIONES
 operation: ifst WS | LOOP WS | declare WS;
 alloperations: operation | operation alloperations;
-
