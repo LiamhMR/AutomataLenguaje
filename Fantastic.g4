@@ -15,6 +15,7 @@ FLAG: 'DOPE'| 'NOPE' | '0' | '1'; //BOOLEAN
 SINGLE_STRING: '<' ~('\'')+ '>'; // SIMPLE
 DOUBLE_STRING: '<<' ~('"')+ '>>'; // DOBLE
 STRING: SINGLE_STRING | DOUBLE_STRING; //Detector de comillas
+MATRIXVAR: (OPENTMOUTH (VARIABLE COMA|VARIABLE)+ CLOSEMOUTH)+;
 
 //OPERADORES
 PLUS: '+';
@@ -33,7 +34,8 @@ CLOSEMOUTH: '>';
 AND: 'YY';
 OR: 'OO';
 COND: AND | OR;
-VARIABLE: NUMBER | STRING | FLAG;
+VARIABLE: NUMBER | STRING | FLAG | MATRIXVAR;
+COMA: ',';
 
 //TIPOS DE DATOS
 INT: 'NUMERITO';
@@ -93,13 +95,14 @@ loop: TILL alloperations TILL NUMBER;
 whilest: ATST iteratecompare WGO alloperations STOP | DO alloperations TILL iteratecompare;
 
 //VARIABLE DECLARATION
-declare: WORD SENTENCE TYPETOKEN | WORD SENTENCE TYPETOKEN definir;
+declare: WORD SENTENCE TYPETOKEN;
+declareplusdef: declare definiciones;
 definir: WORD definiciones;
-definiciones: definirNum | definirStr | definirFlag | definirMatrix;
+definiciones: definirNum | definirStr | definirFlag | definirMatrix (OPENMOUTH NUMBER CLOSEMOUTH)+;
 definirNum: LIKE NUMBER; 
 definirStr: LIKE WORD;
 definirFlag: LIKE FLAG;
-definirMatrix: LIKE (OPENMOUTH NUMBER CLOSEMOUTH)+;
+definirMatrix: LIKE MATRIXVAR;
 
 //OPERACIONES
 operation: ifst WS | LOOP WS | declare WS;
