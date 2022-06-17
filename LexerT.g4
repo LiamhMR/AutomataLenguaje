@@ -1,35 +1,34 @@
 lexer grammar LexerT;
+//DelimitedComment: '/*' ( DelimitedComment | . )*? '*/'
+      //-> channel(HIDDEN);
+//LineComment: '//' ~[\r\n]*
+      //-> channel(HIDDEN);
 
-R  : 'WENA' ID ;         // match keyword hello followed by an identifier
-
-ID : [A-Za-z0-9]+;             // match lower-case identifiers
 
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+//WS: ( '\t' | ' ' | '\r' | '\n'| '\u000C' )+;
 
-LETRAS: [a-z]+; //LETRAS
-DIGITS: [0-9]+; //DIGITO
-NUMBER: DIGITS+; //NÚMERO
-WORD: LETRAS+; //PALABRA
-FLAG: 'DOPE'| 'NOPE' | '0' | '1'; //BOOLEAN
-SINGLE_STRING: '<' ~('\'')+ '>'; // SIMPLE
-DOUBLE_STRING: '<<' ~('"')+ '>>'; // DOBLE
-STRING: SINGLE_STRING | DOUBLE_STRING; //Detector de comillas
+//PARÉNTESIS
+OPENPAREN : '¿' {self.opened += 1};
+CLOSEPAREN : '?' {self.opened -= 1};
+ 
+SINGLE_STR: '<' ~('\'')+ '>'; // SIMPLE
+DOUBLE_STR: '<<' ~('"')+ '>>'; // DOBLE
 
 //OPERADORES
 PLUS: '+';
 LEFT: '-';
 MULT: '*';
 FRAC: '%';
-
-//PARÉNTESIS
-OPENPAREN : '¿' {self.opened += 1};
-CLOSEPAREN : '?' {self.opened -= 1};
-
-BELIKE: 'IGUALITO'| 'NOIGUALITO' |'GRANDESITO'|'CHIQUITO';
+COMA: ',';
+LIKE: '=';
+OPENMOUTH: '<';
+CLOSEMOUTH: '>';
 AND: 'YY';
 OR: 'OO';
 COND: AND | OR;
-VARIABLE: NUMBER | STRING | FLAG;
+
+//PALABRAS CLAVE
 
 //TIPOS DE DATOS
 INT: 'NUMERITO';
@@ -37,6 +36,15 @@ STRINGST: 'CADENITA';
 BOOLEAN: 'LACUERDADELAVERDADDELAMUJERMARAVILLA';
 MATRIX: 'MALLITA';
 TYPETOKEN: INT | STRINGST | BOOLEAN | MATRIX;
+
+WORD: CHAR+;
+NUMBER: DIGITS+; //NÚMERO
+FLAG: 'DOPE'| 'NOPE' | '0' | '1'; //BOOLEAN
+STRING: SINGLE_STR | DOUBLE_STR; //Detector de comillas
+MATRIXVAR: (OPENMOUTH (VARIABLE COMA|VARIABLE)+ CLOSEMOUTH)+;
+
+BELIKE: 'IGUALITO'| 'NOIGUALITO' |'GRANDESITO'|'CHIQUITO';
+VARIABLE: NUMBER | STRING | FLAG;
 
 READ: 'ESCANEAR';
 PRINT: 'TATUAR';
@@ -50,8 +58,8 @@ PI: 'PIPI'; //NÚMERO PI
 E: 'EUHH'; //Profe este es el número de EEEEUHHHHHLEER
 LIGHT: 'VELOCIDADELALÚH';
 
-BEGIN: 'DALE';
-ENDBEGIN: 'PARÁ';
+BEGIN: 'DALE>';
+ENDBEGIN: '<PARÁ';
 RETURN: 'SALITE';
 IFSTART: 'SINO';
 CASE: 'CASO';
@@ -64,4 +72,9 @@ WGO: 'SUCEDE'; //WHAT'S GOING ON
 STOP: 'HASTAACÁMIBRO';
 DO: 'HÁGASE';
 SENTENCE: 'TEDECLARO';
-EOF: 'DOF';
+DOF: 'DOF'; //DEATH OF FILE
+
+//LITERALES
+fragment DIGITS: [0-9]; //DIGITO
+fragment CHAR: ('a'..'z'); //PALABRA
+
