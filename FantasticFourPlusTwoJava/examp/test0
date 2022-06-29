@@ -1,0 +1,7 @@
+DALE>
+myvar TEDECLARO CADENITA=!!soy una cadenita fea¡¡
+mystr TEDECLARO CADENITA=!!soy una cadenita linda¡¡
+CASO myvar NOIGUALITO mystr SUCEDE
+TATUAR mystr
+YNAMÁS
+<PARÁ
