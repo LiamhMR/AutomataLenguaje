@@ -1,0 +1,12 @@
+DALE>
+myvar TEDECLARO CADENITA=!!soy una cadenita fea¡¡
+mystr TEDECLARO CADENITA=!!soy una cadenita linda¡¡
+myint TEDECLARO NUMERITO=25
+mynewint TEDECLARO NUMERITO=15
+myplus TEDECLARO NUMERITO
+myplus=myint+mynewint
+CASO myvar NOIGUALITO mystr SUCEDE
+TATUAR mystr
+TATUAR myplus
+YNAMÁS
+<PARÁ
