@@ -42,10 +42,10 @@ CADENITA
 NUMERITO
 
 Operaciones matemáticas:
-+
--
-/
-*
+SUMA: +
+RESTA: -
+DIVISIÓN: /
+MULTIPLICACIÓN: *
 
 //FACTORIAL
 FACT #tuvariable#
