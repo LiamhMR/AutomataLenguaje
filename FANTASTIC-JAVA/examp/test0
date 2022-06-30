@@ -1,0 +1,13 @@
+DALE>
+randomvar TEDECLARO NUMERITO=4
+myvar TEDECLARO NUMERITO=FACTORIAL randomvar
+mystr TEDECLARO CADENITA=!!cadenita fea¡¡
+myrandomstr TEDECLARO CADENITA=!!cadenita fea¡¡
+TATUAR myvar
+CASO mystr IGUALITO myrandomstr SUCEDE
+newvar TEDECLARO NUMERITO=POTENCIA randomvar,2+POTENCIA 3,3
+TATUAR newvar
+myvar=myvar-newvar
+TATUAR myvar
+YNAMÁS
+<PARÁ

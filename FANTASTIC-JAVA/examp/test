@@ -1,0 +1,10 @@
+DALE>
+myvar TEDECLARO NUMERITO=15
+newvar TEDECLARO NUMERITO
+TATUAR !!myvar¡¡
+myvar = 10+10
+newvar =5*5
+CASO myvar NOIGUALITO newvar SUCEDE
+myvar=FACTORIAL newvar
+YNAMÁS
+<PARÁ
