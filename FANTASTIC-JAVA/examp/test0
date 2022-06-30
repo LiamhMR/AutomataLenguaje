@@ -1,0 +1,6 @@
+DALE>
+myvar TEDECLARO NUMERITO=5
+mystr TEDECLARO CADENITA=!!random¡¡
+myvar =FACTORIAL myvar+5
+TATUAR myvar
+<PARÁ
